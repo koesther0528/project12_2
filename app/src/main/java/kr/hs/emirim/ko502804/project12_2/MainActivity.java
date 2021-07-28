@@ -29,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
         Button btnInit = findViewById(R.id.btn_init);
         Button btnInput = findViewById(R.id.btn_input);
         Button btnSearch = findViewById(R.id.btn_search);
+        Button btnUpdate = findViewById(R.id.btn_update);
+        Button btnDelete = findViewById(R.id.btn_delete);
 
         dbHelper = new MyDBHelper(this);
         btnInit.setOnClickListener(new View.OnClickListener() {
@@ -63,6 +65,21 @@ public class MainActivity extends AppCompatActivity {
                 editCountResult.setText(strCount);
 
                 cursor.close();
+                db.close();
+            }
+        });
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                db = dbHelper.getWritableDatabase();
+                db.execSQL("update groupTB set count ="+editCount.getText().toString());
+                db.close();
+            }
+        });
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                db = dbHelper.getWritableDatabase();
                 db.close();
             }
         });
